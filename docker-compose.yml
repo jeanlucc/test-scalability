@@ -14,18 +14,10 @@ services:
     build:
       context: .
     entrypoint: ./docker/php/docker-entrypoint.sh
-    command: php-fpm
+    command: symfony server:start
     depends_on:
       - pgsql
     volumes:
       - .:/app:cached
-
-  nginx:
-    image: nginx:1.19.7-alpine
     ports:
-      - 8080:80
-    depends_on:
-      - php
-    volumes:
-      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
-      - ./public:/app/public:ro
+      - 8080:8000

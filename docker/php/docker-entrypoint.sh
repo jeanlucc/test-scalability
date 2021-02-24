@@ -7,7 +7,7 @@ if [ "${1#-}" != "$1" ]; then
 	set -- php-fpm "$@"
 fi
 
-if [ "$1" = 'php-fpm' ] || [ "$1" = 'bin/console' ]; then
+if [ "$1" = 'symfony' ] || [ "$1" = 'php-fpm' ] || [ "$1" = 'bin/console' ]; then
 	mkdir -p var/cache var/log
 	if [ "$APP_ENV" != 'prod' ]; then
 		composer install --prefer-dist --no-progress --no-suggest --no-interaction

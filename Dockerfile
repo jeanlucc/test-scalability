@@ -5,7 +5,7 @@ ARG php_env
 COPY --from=composer:2.0 /usr/bin/composer /usr/bin/composer
 
 RUN apk upgrade
-RUN apk add --no-cache --virtual build-dependencies build-base
+RUN apk add --no-cache --virtual build-dependencies build-base bash
 
 RUN apk add --update --no-cache --virtual .build-deps \
 	$PHPIZE_DEPS postgresql-dev; \
@@ -21,5 +21,7 @@ RUN apk add --update --no-cache --virtual .build-deps \
 
 COPY . /app
 WORKDIR /app
+
+RUN wget https://get.symfony.com/cli/installer -O - | bash && mv /root/.symfony/bin/symfony /usr/local/bin/symfony
 
 EXPOSE 9000
